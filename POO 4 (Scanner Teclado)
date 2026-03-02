@@ -1,0 +1,147 @@
+POO 4 - Aprendendo a utilizar teclado para receber valor de variaveis.
+-----------------------------------
+PRINCIPAL:
+package com.mycompany.bancosistema;
+import java.util.Scanner; /*import java.util.* -> Ao colocar o asterisco, diz que se pode utilizar TUDO que esteja no pacote util. Indicado apenas quando se tuilizara diversas funções de uma biblioteca.
+                    Mas por que não colocar em tudo *? Vai afetar diretamente o desempenho, pois ao importar muitas coisas tera problemas com eficiencias
+                    */
+
+public class Principal {
+    
+    public static void main(String[] args) {
+    Scanner tc = new Scanner(System.in);
+    
+// Instanciando contas:
+        System.out.print("Agência(1): ");
+        int agencia = tc.nextInt();
+        System.out.print("N° da conta(1): ");
+        int numero = tc.nextInt();
+        System.out.print("Saldo Inicial(1): ");
+        double saldo = tc.nextDouble();
+        System.out.print("Limite da conta(1): ");
+        double limite = tc.nextDouble();
+
+       Conta c1 = new Conta(agencia, numero, saldo, limite);
+                
+        
+        
+// Operações:
+       
+
+
+        System.out.println(c1.imprimir());
+        
+    }
+}
+
+
+------------------------------------------------------
+CONTA:
+package com.mycompany.bancosistema;
+
+public class Conta {
+
+    private double saldo, limite;
+    private int agencia, numero;
+
+    Conta() { //metodo construtor default.
+        // Evidenciar o conta em vazio. (Obrigatoriamente deve-se declarar ao utilizar o método construtor. pela boa pratica)
+    }
+    
+    public Conta(int agencia, int numero, double saldoinicial, double limite){
+        this.agencia = agencia;
+        this.numero = numero;
+        this.saldo = saldoinicial;
+        this.limite = limite;
+
+    }
+
+    Conta(double valor) {
+        creditar(valor);
+    }
+
+
+
+    /**
+     * @return the saldo
+     */
+    public double getSaldo() {
+        return saldo;
+    }
+
+    /**
+     * @return the limite
+     */
+    public double getLimite() {
+        return limite;
+    }
+
+    /**
+     * @param limite the limite to set
+     */
+    public void setLimite(double limite) {
+        this.limite = limite;
+    }
+
+    /**
+     * @return the agencia
+     */
+    public int getAgencia() {
+        return agencia;
+    }
+
+    /**
+     * @param agencia the agencia to set
+     */
+    public void setAgencia(int agencia) {
+        this.agencia = agencia;
+    }
+
+    /**
+     * @return the numero
+     */
+    public int getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    //metodo responsavel para fazer o saldo disponivel
+    public double getSaldoDisponivel() {
+        return saldo + limite;
+    }
+
+    public void creditar(double valor) {
+        saldo += valor;
+    }
+
+    public boolean debitar(double valor) {
+
+        if (valor <= getSaldoDisponivel()) {
+            saldo -= valor;
+            return true;
+        } else {
+            System.out.println("Saldo Insuficiente.");
+            return false;
+        }
+    }
+
+    public boolean transferir(Conta destino, double valor) {
+        if (this.debitar(valor)) { //Não é necessário colocar o == true, pois o parametro em POO roda toda a função e verificação de debitar.
+            destino.creditar(valor);
+            return true;
+        } else {
+            System.out.println("Impossivel concluir transacao.");
+            return false;
+        }
+    }
+    
+    public String imprimir() {
+        return "Agencia:" + getAgencia() + "\nN Conta: " + getNumero() + "\nSaldo Inicial:" + getSaldo() + "\nLimite: " + getLimite();
+    }
+}
