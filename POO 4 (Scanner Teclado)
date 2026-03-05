@@ -13,7 +13,7 @@ public class Principal {
     
 // Instanciando contas:
         System.out.print("Agência(1): ");
-        int agencia = tc.nextInt();
+        int agencia = tc.nextInt();  //O next é utilizado para leitura de teclado. Caso eu quisesse receber uma variável de outro tipo, escreveria nextDouble, nextFloat, ...
         System.out.print("N° da conta(1): ");
         int numero = tc.nextInt();
         System.out.print("Saldo Inicial(1): ");
