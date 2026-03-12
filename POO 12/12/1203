@@ -1,0 +1,148 @@
+-----------------------------PRINCIPAL
+package com.mycompany.testando;
+
+
+public class Principal {
+
+    public static void main(String[] args) {
+        Bebida coca = new Bebida();
+        
+        coca.darEntrada(10);
+        coca.darBaixa(500);
+     
+        System.out.println(coca.getQuantidadeEstoque());
+        
+    }
+}
+
+--------------------------------------PRODUTO
+package com.mycompany.testando;
+
+
+public class Produto {
+    private int codigo;
+    private String nome;
+    private double valor;
+    
+    public Produto() {
+    }
+
+    public Produto(int codigo, String nome, double valor) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.valor = valor;
+    }
+
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+    
+}
+
+--------------------------------------BEBIDA
+package com.mycompany.testando;
+import java.util.List;
+
+
+public class Bebida extends Produto{
+    private int quantidadeEstoque;
+
+    public Bebida() {
+    }
+
+    public Bebida(int quantidadeEstoque, int codigo, String nome, double valor) {
+        super(codigo, nome, valor);
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+    
+    public void darEntrada(int quantidade){
+        this.quantidadeEstoque += quantidade;    
+    }
+    
+    public void darBaixa(int quantidade){
+        if (quantidade > this.quantidadeEstoque)
+        {
+            System.out.println("Quantidade Insuficiente" + quantidadeEstoque);
+        }
+        else{
+        this.quantidadeEstoque -= quantidade;
+        }
+    }
+    
+    
+}   
+
+-----------------------------------------PIZZA
+package com.mycompany.testando;
+
+import java.util.List;
+
+public class Pizza extends Produto{
+    private String tamanho;
+    private int diametro;
+    private List ingredientes;
+
+    public Pizza(String tamanho, int diametro, List ingredientes, int codigo, String nome, double valor) {
+        super(codigo, nome, valor);
+        this.tamanho = tamanho;
+        this.diametro = diametro;
+        this.ingredientes = ingredientes;
+    }
+
+    public Pizza() {
+    }
+
+    public String getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public int getDiametro() {
+        return diametro;
+    }
+
+    public void setDiametro(int diametro) {
+        this.diametro = diametro;
+    }
+
+    public List getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+    
+}
